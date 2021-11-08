@@ -1,0 +1,96 @@
+@import "../../styles/mixins/mixins";
+
+.chart-container {
+  min-height: 300px;
+}
+
+// Imported to main style document for overwriting default styles from ngx-chart-lib
+.chart {
+
+
+
+  &__growth {
+    position: relative;
+    .chart-legend .legend-wrap {
+      width: 90px !important;
+      position: absolute;
+      left: 130px;
+      top: -10px;
+    }
+
+    .ngx-charts {
+      // @include breakpoint--max-width(399px) {
+      //   position: relative;
+      //   left: 30px;
+      //   background: pink;
+      // }
+      // @include breakpoint--min-width-max-width(400px, 450px) {
+      //   position: relative;
+      //   left: 10px;
+      //   background: chocolate;
+      // }
+      // @include breakpoint--min-width(451px) {
+      //   position: relative;
+      //   left: 10px;
+      //   background: yellow;
+      // }
+      // @include breakpoint--max-width(450px) {
+      //   position: relative;
+      //   left: 10px;
+      // }
+    }
+
+    .ngx-charts-outer {
+      position: relative;
+      top: 10px;
+    }
+  }
+
+  &__growth,
+  &__staffing-recruitments {
+    .ngx-charts {
+      position: relative;
+
+      @include breakpoint--max-width(420px) {
+        left: 30px;
+      }
+
+      @include breakpoint--max-width(460px) {
+        left: 20px;
+      }
+    }
+  }
+
+  //.ngx-charts  max 420 -> 20px
+
+  &__staffing-recruitments {
+    position: relative;
+    .chart-legend .legend-wrap {
+      position: absolute;
+      width: 110px !important;
+
+      left: 40%;
+      bottom: -5px;
+    }
+
+    @include breakpoint--max-width(426px) {
+      top: 20px;
+
+      .chart-legend .legend-wrap {
+        bottom: 0;
+      }
+    }
+
+    .ngx-charts {
+    }
+
+    .ngx-charts-outer {
+      @include breakpoint--min-width(500px) {
+        min-height: 250px;
+      }
+
+      position: relative;
+      top: 5px;
+    }
+  }
+}

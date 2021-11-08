@@ -1,0 +1,98 @@
+<div class="search-form">
+  <ngb-tabset [destroyOnHide]="false" justify="center" class="search-tabs-container">
+    <ngb-tab title="Detaljerad sökning">
+      <ng-template ngbTabContent>
+        <form class="">
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap.gt-md="30px" fxLayoutAlign="start center">
+            <div class="searchfields" fxLayout="row" fxFlex="100%" fxFlex.gt-sm="50%" >
+              <mat-form-field appearance="outline" color="primary" class="searchfield-yrke"  *ngIf="searchType == searchTypeYrke">
+                <mat-label>Välj ett yrke<span *ngIf="randomOccupationName"> t.ex {{randomOccupationName}}</span></mat-label>
+                <input matInput placeholder="" [matAutocomplete]="auto1" [formControl]="occupationCtrl"
+                       id="occupationSearchInput">
+                <mat-icon matPrefix>search</mat-icon>
+                <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete" panelWidth="40%" [displayWith]="displayFnOccupation" (optionSelected)="selectOccupation($event)">
+                  <mat-option
+                          *ngFor="let occ of (filteredOccupations | async)"
+                          [value]="occ"
+                          required
+
+                  >
+                    <span>{{ occ.name }}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" color="primary" class="searchfield-bransch"  *ngIf="searchType == searchTypeBransch">
+                <mat-label>Sök på bransch</mat-label>
+                <input matInput placeholder="" [matAutocomplete]="auto2"
+                       [formControl]="industryCtrl"
+                       id="industrySearchInput">
+                <mat-icon matPrefix>search</mat-icon>
+                <mat-autocomplete #auto2="matAutocomplete" panelWidth="30%" [displayWith]="displayFnIndustry" (optionSelected)="selectIndustry($event)">
+                  <mat-option
+                          *ngFor="let industry of (filteredIndustries | async)"
+                          [value]="industry"
+                  >
+                    <span>{{ industry.name }}</span>
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+
+              <mat-form-field appearance="outline" class="select-search-type-container">
+                <mat-select
+                        class="select-search-type"
+                        [ngClass]="{
+            bransch: searchType == 'bransch',
+            yrke: searchType == 'yrke'
+          }"
+                        [(value)]="searchType"
+                >
+                  <mat-option value="yrke">Yrke</mat-option>
+                  <mat-option value="bransch">Bransch</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </div>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Sök på ort/kommun/län</mat-label>
+              <input matInput placeholder=""
+                     id="locationSearchInput"
+                     [matAutocomplete]="auto3"
+                     [formControl]="locationCtrl">
+              <mat-icon matPrefix>search</mat-icon>
+              <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete" [displayWith]="displayFnLocation" (optionSelected)="selectLocation($event)">
+                <mat-option
+                        *ngFor="let p of (filteredLocations | async)"
+                        [value]="p"
+                >
+                  <span>{{ p.name }}</span> <small> ({{ p.displayType }})</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="search-button btn-primary-jobbometern"  fxFlex="15" (click)="searchDetailed()">Sök</button>
+          </div>
+        </form>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle>Fritextsökning</ng-template>
+      <ng-template ngbTabContent>
+        <form class="search-form">
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="30px" fxLayoutAlign="start center">
+            <mat-form-field appearance="outline" color="primary" fxFlex="60">
+              <mat-label>Sök på t.ex. företagsnamn, kompetenser, förmågor eller organisationsnummer</mat-label>
+              <input matInput placeholder=""
+                     [formControl]="freeSearchCtrl"
+                     id="freeSearchInput"
+                     autocomplete="off">
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="search-button btn-primary-jobbometern" fxFlex="15" (click)="searchFreeText()">Sök</button>
+          </div>
+        </form>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

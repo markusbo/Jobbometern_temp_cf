@@ -1,0 +1,404 @@
+<div id="employer-info-container" class="content-container--inner" *ngIf="this.employer">
+
+  <h2 class="section-title" *ngIf="employer">{{ employer.namn }}</h2>
+  <div class="card-item-container">
+    <h2 class="card-title">Om arbetsgivaren</h2>
+    <div class="card-item info">
+      <div class="group-1">
+        <div class="group info" *ngIf="employer">
+          <div class="info-row">
+            <p class="label-text">Namn:</p>
+            <p class="value-text">{{ employer.namn }}</p>
+          </div>
+          <div class="info-row">
+            <p class="label-text">Organisationsnummer:</p>
+            <p class="value-text">{{ employer.organisationsnummer }}</p>
+          </div>
+          <div
+                  class="info-row"
+                  *ngIf="showParentCompanyName()"
+          >
+            <p class="label-text">Moderbolag:</p>
+            <p class="value-text">{{ employer.moderNamn }}</p>
+          </div>
+
+          <div class="info-row">
+            <p class="label-text">Antal anställda:</p>
+            <p class="value-text">
+              ca {{ employer.ekonomiskInformation.antalAnstallda | roundDynamic }}
+            </p>
+          </div>
+          <div class="info-row">
+            <p class="label-text">Adress:</p>
+            <p class="value-text">
+              {{ employer.utdelningsadress.adress1 }}
+              {{ employer.utdelningsadress.postort }}
+              {{ employer.utdelningsadress.land }}
+              {{ employer.utdelningsadress.postnummer }}
+            </p>
+          </div>
+          <div class="info-row" *ngIf="employer && employer.historik.hemsida">
+            <p class="label-text">Webbadress:</p>
+            <p class="value-text">
+              <a
+                      class="web"
+                      href="{{employer.historik.hemsida}}"
+                      target="_blank" title="Länk till {{employer.historik.hemsida}}. Öppnas i nytt fönster."
+              >{{ employer.historik.hemsida | cleanUpUrl }}&nbsp;<fa-icon [icon]="faExternalLinkAlt" class="pl-2"></fa-icon></a>
+            </p>
+          </div>
+          <div class="group-1">
+            <h2 class="employer-info-sub-section-title card-title">Prognos närmaste året&nbsp;<span (click)="tooltipEmployerData.toggle()"
+                                                                                             class="info-bubble-text"
+                                                                                             aria-label="Läs mer om prognos det närmaste året">
+                      <fa-icon [icon]="faInfoCircle"></fa-icon>
+                    </span>
+              <span class="info-bubble-text"
+                    #tooltipEmployerData="matTooltip"
+                    matTooltip="Uppskattad tillväxttakt baseras på inbetalda arbetsgivaravgifter.
+                Tillförlitligheten är högre för arbetsgivare med en historiskt jämn och stabil utveckling."
+                    matTooltipPosition="right" matTooltipClass="wide-tooltip"></span>
+            </h2>
+          </div>
+          <div class="info-row">
+            <p class="label-text">Förväntade nyrekryteringar:</p>
+            <p class="value-text">ca {{ employer.rankValue }}</p>
+          </div>
+          <div class="info-row">
+            <p class="label-text">Förväntad tillväxttakt:</p>
+
+            <p *ngIf="employer.man12_rel < 0" class="value-text">Mycket låg</p>
+            <p
+                    *ngIf="employer.man12_rel >= 0 && employer.man12_rel <= 3"
+                    class="value-text"
+            >
+              Låg
+            </p>
+            <p
+                    *ngIf="employer.man12_rel > 3 && employer.man12_rel <= 6"
+                    class="value-text"
+            >
+              Stabil
+            </p>
+            <p
+                    *ngIf="employer.man12_rel > 6 && employer.man12_rel < 10"
+                    class="value-text"
+            >
+              Snabb
+            </p>
+            <p *ngIf="employer.man12_rel >= 10" class="value-text">
+              Mycket snabb
+            </p>
+          </div>
+
+        </div>
+      </div>
+      <div *ngIf="employer" class="group-2">
+        <div class="info-row">
+          <p class="label-text">Uppskattad tillväxttakt:</p>
+        </div>
+        <img
+                *ngIf="employer.man12_rel < 0"
+                class="jobbometer__icon"
+                src="../../assets/icons/speedo-1.svg"
+        />
+        <img
+                *ngIf="employer.man12_rel >= 0 && employer.man12_rel <= 3"
+                class="jobbometer__icon"
+                src="../../assets/icons/speedo-2.svg"
+        />
+
+        <img
+                *ngIf="employer.man12_rel > 3 && employer.man12_rel <= 6"
+                class="jobbometer__icon"
+                src="../../assets/icons/speedo-3.svg"
+        />
+
+        <img
+                *ngIf="employer.man12_rel > 6 && employer.man12_rel < 10"
+                class="jobbometer__icon"
+                src="../../assets/icons/speedo-4.svg"
+        />
+
+        <img
+                *ngIf="employer.man12_rel >= 10"
+                class="jobbometer__icon"
+                src="../../assets/icons/speedo-5.svg"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="card-item-container">
+    <h2 class="card-title">Rekrytering under året&nbsp;<span (click)="tooltipHistoricalRecruitments.toggle()"
+                                                                          class="info-bubble-text"
+                                                                          aria-label="Läs mer om Andel historiska rekryteringar per månad">
+                       <fa-icon [icon]="faInfoCircle"></fa-icon>
+                    </span>
+      <span class="info-bubble-text"
+            #tooltipHistoricalRecruitments="matTooltip"
+            matTooltip="Diagrammet baseras på arbetsgivarens annonsering på Platsbanken sedan 2006 och visar medelvärden för när arbetsgivaren brukar annonsera under året."
+            matTooltipPosition="right" matTooltipClass="wide-tooltip"></span></h2>
+    <div class="card-item staffing-recruitments">
+
+      <div *ngIf="employer && hasRecruitmentsPerMonthChartData()" class="group-1 recruitements-per-month-container">
+        <ngx-charts-line-chart
+                [scheme]="colorScheme"
+                [legend]="legend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxis]="xAxis"
+                [yAxis]="yAxis"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                [timeline]="timeline"
+                [results]="_recruitmentsPerMonthChartData"
+        >
+        </ngx-charts-line-chart>
+      </div>
+      <div *ngIf="employer && !hasRecruitmentsPerMonthChartData()" class="staffing-recruitments-no-data">Ingen historisk data tillgänglig</div>
+    </div>
+  </div>
+
+  <!-- Aktuella jobbannonser -->
+  <!--Inga aktuella platsannonser hittades för ARBETSGIVARNAMN och region -->
+
+    <h2 class="section-title">Platsannonser i Platsbanken</h2>
+    <div class="card-item-container">
+      <ng-container *ngIf="employer && ads && ads.hits.length > 0">
+      <h2 class="card-title">Publicerade annonser just nu hos {{employer.namn}}<span *ngIf="isRegionInCurrentSearch()">, region: {{getCurrentSearchRegionValue()}}</span>&nbsp;<span (click)="tooltipJobAds.toggle()"
+                                                                                      class="info-bubble-text"
+                                                                                      aria-label="Läs mer om Publicerade annonser">
+                       <fa-icon [icon]="faInfoCircle"></fa-icon>
+                    </span>
+        <span class="info-bubble-text"
+              #tooltipJobAds="matTooltip"
+              matTooltip="Klicka på länkarna för att öppna annonsen i ett nytt webbläsarfönster."
+              matTooltipPosition="right" matTooltipClass="wide-tooltip"></span>
+      </h2>
+      <div class="card-item announcements">
+
+        <ng-container *ngIf="!showMoreAds">
+          <div *ngFor="let ad of ads.hits.slice(0, nrOfInitialAds)">
+            <p class="announcements_item">
+              <span class="announcements-item__date">{{
+                ad.publication_date | date: "yyyy-MM-dd"
+                }}</span>
+              <a href="{{ad.webpage_url}}" target="_blank" title="Länk till Platsbanken. Öppnas i nytt fönster.">{{ ad.headline }} <fa-icon [icon]="faExternalLinkAlt" class="pl-2"></fa-icon></a>
+            </p>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="showMoreAds">
+          <div *ngFor="let ad of ads.hits">
+            <p class="announcements_item">
+              <span class="announcements-item__date">{{
+                ad.publication_date | date: "yyyy-MM-dd"
+                }}</span>
+              <a href="{{ad.webpage_url}}" target="_blank" title="Länk till Platsbanken. Öppnas i nytt fönster.">{{ ad.headline }} <fa-icon [icon]="faExternalLinkAlt" class="pl-2"></fa-icon></a>
+            </p>
+          </div>
+          <span *ngIf="ads.total.value > 100">{{ employer.namn }} har just nu {{ads.total.value}} publicerade annonser men ovanstående lista är begränsad till {{ads.hits.length}} annonser.</span>
+        </ng-container>
+
+        <div *ngIf="!showMoreAds && hasMoreAds()">
+          <button class="show-more-less" mat-button (click)="showMoreAds=true"><span>Visa fler annonser<fa-icon [icon]="faAngleDown" class="pl-2"></fa-icon></span></button>
+        </div>
+        <div *ngIf="showMoreAds">
+          <button class="show-more-less" mat-button (click)="showMoreAds=false"><span>Visa färre annonser<fa-icon [icon]="faAngleUp" class="pl-2"></fa-icon></span></button>
+        </div>
+      </div>
+
+      </ng-container>
+      <div class="card-item announcements pt-3" *ngIf="employer && ads && ads.hits.length == 0">
+      Det finns inga publicerade annonser just nu hos {{employer.namn}}<span *ngIf="isRegionInCurrentSearch()">, region: {{getCurrentSearchRegionValue()}}</span>
+      </div>
+
+    </div>
+
+
+  <!-- Arbetsgivarens arbetsställen -->
+  <ng-container *ngIf="employer && employer.workplaces && employer.workplaces.length > 0">
+    <div class="card-item-container">
+      <h2 class="card-title">Arbetsställen&nbsp;<span (click)="tooltipWorkplaces.toggle()"
+                                                      class="info-bubble-text"
+                                                      aria-label="Läs mer om Publicerade annonser">
+                       <fa-icon [icon]="faInfoCircle"></fa-icon>
+                    </span>
+        <span class="info-bubble-text"
+              #tooltipWorkplaces="matTooltip"
+              matTooltip="Klicka på länkarna för att visa en karta i ett nytt webbläsarfönster."
+              matTooltipPosition="right" matTooltipClass="wide-tooltip"></span>
+      </h2>
+      <div class="card-item announcements">
+
+        <div *ngFor="let workplace of employer.workplaces.slice(workplacesPaginationStart, workplacesPaginationEnd); let odd = odd">
+          <div class="card-item info no-margin-bottom" [class.odd]="odd">
+            <div class="group-1">
+              <div class="group info">
+                <div class="info-row">
+                  <p class="workplace-label-text">Namn:</p>
+                  <p class="workplace-value-text">
+                    {{ workplace.name }}
+                  </p>
+                  <p class="workplace-value-link">
+                    <a (click)="gotoOpenStreetMapURL(workplace)" href="{{openStreetMapURL(workplace)}}" target="_blank" title="Länk till Open Street Maps. Öppnas i nytt fönster.">Visa karta i Open Street Maps<fa-icon [icon]="faExternalLinkAlt" class="pl-2"></fa-icon></a>
+                  </p>
+                </div>
+                <div class="info-row" *ngIf="workplace.visitAddressCo && workplace.visitAddressCo!=''">
+                  <p class="workplace-label-text">Co</p>
+                  <p class="workplace-value-text">
+                    {{ workplace.visitAddressCo }}
+                  </p>
+                  <p class="workplace-value-link">
+                  </p>
+                </div>
+                <div class="info-row">
+                  <p class="workplace-label-text">Besöksadress:</p>
+                  <p class="workplace-value-text">
+                    {{ workplace.visitAddress }}
+                  </p>
+                  <p class="workplace-value-link">
+                    <a (click)="gotoGoogleMapsURL(workplace)" href="{{openGoogleMapsURL(workplace)}}" target="_blank" title="Länk till Google Maps. Öppnas i nytt fönster.">Visa karta i Google Maps<fa-icon [icon]="faExternalLinkAlt" class="pl-2"></fa-icon></a>
+                  </p>
+                </div>
+                <div class="info-row">
+                  <p class="workplace-label-text"></p>
+                  <p class="workplace-value-text">
+                    {{ workplace.visitAddressZipCode }} {{ workplace.visitAddressPostOffice }}
+                  </p>
+                  <p class="workplace-value-link">
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="workplacesPaginationShowMore()" class="margin-top-15">
+          <button class="show-more-less" mat-button (click)="workplacesPaginationIncreaseInterval()"><span>{{ workplacesPaginationEnd }} av {{totalWorkplaces()}} arbetsställen. Visa {{ workplacesPaginationNextInterval() }} fler<fa-icon [icon]="faAngleDown" class="pl-2"></fa-icon></span></button>
+        </div>
+        <div *ngIf="workplacesPaginationShowLess()" class="margin-top-15">
+          <button class="show-more-less" mat-button (click)="workplacesPaginationToStartingInterval()"><span>Visa färre arbetsställen ({{nrOfInitialWorkplaces}} st)<fa-icon [icon]="faAngleUp" class="pl-2"></fa-icon></span></button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Förväntade toppyrken -->
+  <div class="card-item-container" >
+    <!--showOccupationsChart: {{showOccupationsChart}}-->
+    <!--showEnrichments: {{showEnrichments}}-->
+    <!--hasOccupations: {{hasOccupations}}-->
+    <!--selectedOccupation: {{selectedOccupation}}-->
+    <!--employer: {{employer}}-->
+    <h2 *ngIf="selectedOccupation && hasOccupations && employer.historikFinns" class="card-title">Yrke: {{selectedOccupation}}&nbsp;<span (click)="tooltipTopOccupations.toggle()"
+                                                                                        class="info-bubble-text"
+                                                                                        aria-label="Läs mer om arbetsgivarens yrken">
+                       <fa-icon [icon]="faInfoCircle"></fa-icon>
+                    </span>
+      <span class="info-bubble-text"
+            #tooltipTopOccupations="matTooltip"
+            matTooltip="Diagrammet baseras på arbetsgivarens annonsering på Platsbanken sedan 2006."
+            matTooltipPosition="right" matTooltipClass="wide-tooltip"></span></h2>
+
+    <h2 *ngIf="selectedOccupation && showOccupationsChart && hasOccupations && !employer.historikFinns" class="card-title">Yrke: {{selectedOccupation}}&nbsp;<span (click)="tooltipTopRelatedOccupations.toggle()"
+                                                                                                                class="info-bubble-text"
+                                                                                                                aria-label="Läs mer om arbetsgivarens yrken">
+                       <fa-icon [icon]="faInfoCircle"></fa-icon>
+                    </span>
+      <span class="info-bubble-text"
+            #tooltipTopRelatedOccupations="matTooltip"
+            matTooltip="Diagrammet baseras på liknande arbetsgivares annonsering på Platsbanken sedan 2006."
+            matTooltipPosition="right" matTooltipClass="wide-tooltip"></span></h2>
+
+    <h2 *ngIf="!selectedOccupation" class="card-title">Yrke</h2>
+
+    <div class="card-item announcements" *ngIf="!showOccupationsChart">
+      <p>
+        Information om yrken saknas för {{employer.namn}}
+      </p>
+      <button class="show-more-less" mat-button (click)="showOccupationsChart=true"><span>Visa yrkesinformation för liknande arbetsgivare<fa-icon [icon]="faAngleDown" class="pl-2"></fa-icon></span></button>
+    </div>
+
+
+    <div class="card-item efterfragadeYrken">
+        <div fxLayout="column" fxLayoutAlign="start stretch" fxFlex="100">
+          <div *ngIf="employer && showOccupationsChart && hasOccupations" >
+            <div *ngIf="employer && employer.historikFinns">
+              Förväntade yrken hos arbetsgivaren:
+            </div>
+            <div *ngIf="employer && !employer.historikFinns">
+              Förväntade yrken hos liknande arbetsgivare:
+            </div>
+            <div>
+              <google-chart #chart
+                            [title]="chartsOccupationsTitle"
+                            [type]="type"
+                            [data]="_chartsOccupations"
+                            [options]="options"
+                            (ready)="onReadyForvantadeYrken($event)"
+                            (select)="onSelectForvantadeYrken($event)" id="forvantadeyrkenchart" class="google-chart">
+              </google-chart>
+            </div>
+          </div>
+          <div *ngIf="showOccupationsChart">
+            <div *ngIf="showEnrichments">
+                Efterfrågade kompetenser och förmågor för yrket {{selectedOccupation}}<span *ngIf="employer.historikFinns"> hos {{employer.namn}}</span>:
+            </div>
+            <div *ngIf="!showEnrichments" class="no-skills-traits-container">
+              Inga efterfrågade kompetenser och förmågor kunde hittas för yrket {{selectedOccupation}}<span *ngIf="employer.historikFinns"> hos {{employer.namn}}</span>.
+            </div>
+            <div class="skills-traits-container" *ngIf="showEnrichments && showOccupationsChart">
+            <div fxFlex fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center stretch">
+              <div fxFlex="100%" fxFlex.gt-sm="50%">
+                <span class="font-bold">Efterfrågade kompetenser:</span>
+                <ng-container *ngIf="!showMoreCompetenciesAndTraits">
+                  <ul>
+                    <li *ngFor="let comp of topCompetencies.slice(0, nrOfInitialCompetencies)">
+                      {{ comp }}
+                    </li>
+                  </ul>
+                </ng-container>
+                <ng-container *ngIf="showMoreCompetenciesAndTraits">
+                  <ul>
+                    <li *ngFor="let comp of topCompetencies">
+                      {{ comp }}
+                    </li>
+                  </ul>
+                </ng-container>
+              </div>
+
+              <div fxFlex="100%" fxFlex.gt-sm="50%">
+                <span class="font-bold">Efterfrågade förmågor:</span>
+                <ng-container *ngIf="!showMoreCompetenciesAndTraits">
+                  <ul>
+                    <li *ngFor="let trait of topTraits.slice(0, nrOfInitialTraits);let i = index">
+                      {{ trait }}
+                    </li>
+                  </ul>
+                </ng-container>
+                <ng-container *ngIf="showMoreCompetenciesAndTraits">
+                  <ul>
+                    <li *ngFor="let trait of topTraits;let i = index">
+                      {{ trait }}
+                    </li>
+                  </ul>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+            <div *ngIf="showEnrichments && !showMoreCompetenciesAndTraits && hasMoreCompetenciesOrTraits()">
+              <button class="show-more-less" mat-button (click)="showMoreCompetenciesAndTraits=true"><span>Visa fler kompetenser och förmågor<fa-icon [icon]="faAngleDown" class="pl-2"></fa-icon></span></button>
+            </div>
+            <div *ngIf="showEnrichments && showMoreCompetenciesAndTraits">
+              <button class="show-more-less" mat-button (click)="showMoreCompetenciesAndTraits=false"><span>Visa färre kompetenser och förmågor<fa-icon [icon]="faAngleUp" class="pl-2"></fa-icon></span></button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+

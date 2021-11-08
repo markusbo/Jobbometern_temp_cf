@@ -1,0 +1,384 @@
+@import "../../styles/mixins/mixins";
+@import "../../styles/variables/variables";
+
+.part-of-hero {
+  width: 100%;
+  height: 100px;
+  background: url("../../assets/christopher-burns-368617-unsplash.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  @include outer-container();
+
+  @include breakpoint--max-width(1000px) {
+    height: 100px;
+  }
+}
+
+.great-name-title-container {
+  height: 100px;/*150px*/
+  width: 100%;
+  background: $color--AF-blue;
+  .name-title {
+    font-size: 24px;
+    margin: 0;
+  }
+  @include outer-container();
+
+  @include breakpoint--max-width(1000px) {
+    height: 100px;
+  }
+
+  @include breakpoint--max-width(600px) {
+    height: 70px;
+    .name-title {
+      font-size: 25px;
+    }
+  }
+
+  .inner-container {
+    height: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    @include content-container;
+  }
+}
+
+.content-container {
+  &--outer {
+    @include breakpoint--max-width(800px) {
+      padding: 5px;
+    }
+    @include breakpoint--min-width(801px) {
+      padding: 50px;
+    }
+  }
+  &--inner {
+    @include content-container;
+  }
+}
+
+.next-prev-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.card-title {
+  color: $color--AF-blue;
+  font-weight: 700;
+  font-size: 20px;/*25px*/
+  margin-bottom: 10px;/*20px*/
+  @include breakpoint--max-width(600px) {
+    font-size: 28px;/*20px*/
+  }
+}
+
+.info-bubble-text {
+  color: #1616b2;
+  cursor: pointer;
+}
+
+.info-circle {
+  color: #13769d;
+  font-size: 19px;
+  margin-left: 8px;
+  margin-right: 2px;
+  position: relative;
+  bottom: -2px;
+  cursor: pointer;
+  height: 21px;
+}
+
+.recruitements-per-month-container {
+  width: 100%;
+  min-height: 300px;
+}
+
+.section-title {
+  color: $color--gray-dark-1;
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+.employer-info-sub-section-title {
+  padding-left: 0 !important;
+  color: $color--AF-blue;
+  font-size: 1.4em;
+  margin-top: 1.5em !important;
+  margin-bottom: 0.5em !important;
+}
+
+
+.card-item-container {
+  background: #fff;
+  width: 100%;
+  @include shadow();
+
+  @include breakpoint--min-width(1001px) {
+    border-right: 1px solid $color--primary-bg;
+    border-bottom: 1px solid $color--primary-bg;
+    border-left: 15px solid $color--primary-bg;
+    margin-bottom: 14px;
+  }
+
+  @include breakpoint--max-width(1000px) {
+    border-bottom: 15px solid $color--primary-bg;
+    border-left: none;
+  }
+
+  .card-title {
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+    margin-bottom: 0;
+  }
+
+}
+
+// Positions
+.card-item {
+  font-size: 14px;
+
+  width: 100%;
+
+
+  @include breakpoint--max-width(600px) {
+    padding: 4px;
+    margin-bottom: 15px !important;
+    font-size: 12px;
+
+    .percent-circle {
+      margin-top: 30px !important;
+    }
+    .group-1 {
+      margin-bottom: 15px !important;/*30px*/
+    }
+  }
+  @include breakpoint--min-width(601px) {
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  @include breakpoint--max-width(1000px) {
+    flex-direction: column;
+    align-items: center;
+
+    &.predictions {
+      .info-group {
+        max-width: 100% !important;
+      }
+    }
+
+    .group-1 {
+      margin-bottom: 40px;
+    }
+    .group-2 {
+    }
+  }
+
+  @include breakpoint--min-width(1001px) {
+    display: flex;
+    justify-content: space-between;
+
+
+    .group-1 {
+      display: flex;
+      align-items: center;
+      margin-right: 50px;
+    }
+
+    .group-2 {
+      margin-right: 50px;
+    }
+
+    &.staffing-recruitments {
+      padding-top: 50px;
+      padding-right: 40px;
+    }
+  }
+}
+
+.staffing-recruitments-no-data {
+  margin-top: -30px;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0px!important;
+  padding: 5px 0px 5px 10px!important;
+}
+
+.odd {
+  background-color: $color--gray-light-2;
+}
+
+.margin-top-15 {
+  margin-top: 15px
+}
+
+.card-item.info {
+  .group.info {
+    @include breakpoint--max-width(1000px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .info-row {
+      display: flex;
+      margin-bottom: 3px;
+      @include breakpoint--max-width(1000px) {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      p {
+        margin: 0;
+      }
+      .label-text {
+        width: 250px;
+      }
+      .value-text {
+        font-weight: 700;
+      }
+      .workplace-label-text {
+        width: 125px;
+      }
+      .workplace-value-text {
+        font-weight: 700;
+        width: 250px;
+      }
+      .workplace-value-link {
+        font-weight: 700;
+      }
+    }
+    .web {
+      min-width: 250px;
+      font-weight: 700;
+      color: $color--sky-blue;
+    }
+  }
+
+  .group-2 {
+    .jobbometer__icon {
+      @include breakpoint--max-width(500px) {
+        width: 100px;
+        height: 100px;
+      }
+      display: flex;
+      align-items: center;
+      width: 150px;
+      height: 150px;
+    }
+
+    .label-text {
+    }
+  }
+}
+
+.card-item.predictions {
+  .info-group {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    .percent-circle {
+      margin: 0 auto;
+      margin-top: 20px;
+      width: 150px;
+      height: 150px;
+      background: $color--sky-blue;
+      border-radius: 75px;
+      color: #fff;
+      text-align: center;
+      .percent-growth {
+        font-weight: lighter;
+        font-size: 40px;
+        margin-top: 40px;/*30px*/
+        margin-bottom: 0;
+      }
+      .percent-margin-of-error {
+        font-size: 20px;
+        margin: 0;
+        position: relative;
+        bottom: 5px;
+      }
+    }
+  }
+}
+
+//.card-item.occupations {
+//  .top-3-occ-list {
+//    &__item {
+//      font-weight: 700;
+//      hyphens: auto;
+//      word-break: break-all;
+//    }
+//  }
+//}
+
+.card-item.efterfragadeYrken {
+  .top-3-occ-list {
+    &__item {
+      font-weight: 700;
+      hyphens: auto;
+      word-break: break-all;
+    }
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .google-chart-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .google-chart {
+    width: 100%;
+    min-height: 400px;
+    cursor: pointer;
+  }
+
+  .skills-traits-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch
+  }
+
+  .no-skills-traits-container {
+    min-height: 220px
+  }
+
+}
+
+.card-item.announcements {
+  display: block;
+  .announcements-item {
+    margin-bottom: 10px;
+    &__date {
+      @include breakpoint--max-width(600px) {
+        display: block;
+      }
+      hyphens: auto;
+      word-break: break-all;
+      font-weight: 700;
+      margin-right: 50px;
+    }
+  }
+}
+
+button.show-more-less {
+  background-color: #fff;
+  color: $color--AF-blue;
+  border: 1px solid $color--AF-blue;
+  width: 100%;
+}
+
+.advanced-pie-legend .legend-items-container .legend-items .legend-item {
+  display: inherit !important;
+}
+
+

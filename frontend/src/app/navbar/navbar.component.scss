@@ -1,0 +1,52 @@
+@import "../../styles/variables/variables";
+@import "../../styles/mixins/mixins";
+
+
+.navbar {
+  padding: 0.2em !important;
+  width: 100%;
+  position: relative !important;
+}
+
+.bg-color-1 {
+  background-color: $color--gray-light-4 !important;
+  height: 60px;
+}
+
+.header-lead {
+  margin: 0.5em 1em 0.5em 1em;
+  padding: 0 0.5em 0 0.5em;
+  text-align: center;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: #000000;
+  justify-content: center;
+  font-family: monospace;
+  font-style: italic;
+  @include breakpoint--min-width(800px)  {
+    margin-left: 4em;
+  }
+
+  @include breakpoint--min-width(1200px) {
+    margin-left: 5em;
+  }
+
+  @include breakpoint--min-width(1600px) {
+    margin-left: 7em;
+  }
+
+
+
+}
+
+.img-size-half {
+  height:45px;
+}
+
+.p-lead2 {
+  position:absolute;
+  right:20px;
+  margin-bottom: 0;
+  justify-content: right;
+  line-height: 100px;
+}

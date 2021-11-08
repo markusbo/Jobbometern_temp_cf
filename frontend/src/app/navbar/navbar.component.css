@@ -1,0 +1,195 @@
+.navbar {
+  width: 100%;
+}
+
+.navbar-dark .navbar-brand {
+  color: #36769a;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+input.form-control,
+button.search {
+  border-radius: 4px;
+  border: 2px solid #36769a;
+}
+
+button.search {
+  background-color: #717578;
+  height: 38px;
+  color: #fff;
+  border: 2px solid #717578;
+}
+
+button.search:hover {
+  background-color: #1c769b;
+  border: 2px solid #1c769b;
+}
+
+.bg-dark {
+  background-color: #fff !important;
+  height: 80px;
+}
+
+/* Placeholder */
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  font-weight: 300;
+  font-size: 13px;
+  color: #397697;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  font-weight: 300;
+  font-size: 13px;
+  color: #397697;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  font-weight: 300;
+  font-size: 13px;
+  color: #397697;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  font-weight: 300;
+  font-size: 13px;
+  color: #397697;
+}
+
+/* Navbar career search */
+.search,
+.location {
+  position: relative;
+}
+.search input,
+.location input {
+  text-indent: 21px;
+  color: #397697;
+}
+
+@media only screen and (min-width: 992px) {
+  .search input,
+  .location input {
+    width: 270px;
+  }
+}
+
+.search .fa-search,
+.location .fa-map-marker-alt {
+  color: #36769a;
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  font-size: 18px;
+}
+
+.nav-logo {
+  height: 39px;
+}
+
+.navbar-search {
+  display: inline-flex;
+  float: right;
+}
+
+.regular-navbar {
+  width: 100%;
+}
+
+.navbar-brand {
+  padding-top: 14px;
+}
+
+@media only screen and (min-width: 992px) {
+  #mobile-navbar {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  /* xs sm dropdown navbar */
+  .regular-navbar {
+    display: none;
+  }
+  .pull-right {
+    float: right !important;
+  }
+
+  .nav-button {
+    font-size: 18px;
+  }
+  .navbar-mobile {
+    display: block;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  i.fas.fa-search {
+    display: block;
+  }
+
+  .navbar-header {
+    margin-top: 10px;
+  }
+
+  .navbar-collapse {
+    background-color: #3c7696;
+  }
+
+  .navbar-search {
+    display: block;
+    float: none;
+  }
+
+  .search .fa-search {
+    top: 12px;
+  }
+
+  .navbar {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #mobile-navbar-search {
+    position: absolute;
+    width: 100%;
+    top: 80px;
+    z-index: 99999999;
+    padding-top: 6px;
+  }
+
+  button.search {
+    width: 100%;
+  }
+
+  .navbar-collapse {
+    position: absolute;
+    width: 100%;
+    top: 80px;
+    z-index: 999;
+  }
+  .navbar-jobb {
+    border: none;
+    background-color: #fff;
+  }
+}
+
+.p-header-lead {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 900;
+  color: rgb(1, 6, 88);
+  justify-content: center;
+  line-height: 50px;
+}
+
+.header-logo {
+  position: absolute;
+  top: 22px;
+}

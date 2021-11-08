@@ -1,0 +1,294 @@
+@import "../../styles/variables/variables";
+@import "../../styles/mixins/mixins";
+
+.result-list-container {
+  background: $color--gray-light-1;
+}
+
+
+.searchresultspinner-area {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  font-size: 14px;
+}
+
+.searchresultbackenderror-area fa-icon{
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  font-size: 3.5em;
+}
+
+.searchresultbackenderror-area span.errortext {
+  font-size: 14px;
+  color: red;
+}
+
+:host ::ng-deep .jobbometer-spinner circle{
+  stroke: $color--AF-blue;
+}
+
+// Force scrollbar to show in Mac - begin
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+// Force scrollbar to show in Mac - end
+
+.result-list-items-container {
+  // Note: Height is also set in the component with Typescript.
+  height:100vh;
+  overflow: auto;
+  padding-bottom: 4em;
+
+}
+
+.info-bubble-text {
+  color: #1616b2;
+  cursor: pointer;
+}
+
+.info-circle {
+  color: #13769d;
+  font-size: 19px;
+  margin-left: 8px;
+  margin-right: 2px;
+  position: relative;
+  bottom: -2px;
+  cursor: pointer;
+  height: 21px;
+}
+
+h3 {
+  .info-circle {
+    bottom: 2px;
+  }
+}
+
+.mat-tooltip {
+  max-width: 540px !important;
+}
+
+.result-info {
+  font-size: 20px;
+  color: $color--AF-blue;
+  margin-bottom: 15px;
+
+  .info-type {
+    font-size: 14px;
+    margin-right: 10px;
+    &__label {
+      font-weight: 700;
+    }
+  }
+
+  .result-info {
+    &__value {
+    }
+  }
+
+  .result-info-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+button.selected-employer {
+  background-color: $color--primary-bg;
+  color: #fff;
+}
+
+.result-list-item {
+  cursor: pointer;
+  background: #fff;
+  border-style: none;
+  width: 100%;
+
+
+
+  @include shadow();
+  .top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 15px;/*20px*/
+
+    .group-2 {
+      .jobbometer__icon {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .result {
+      &__name {
+        margin: 0;
+        font-size: 12px;
+        padding-left: 15px;
+      }
+      &__web {
+        font-weight: 600;
+        color: $color--sky-blue;
+        padding-left: 15px;
+      }
+    }
+  }
+
+  .info-container {
+    background: #fff;
+    padding: 10px;
+    display: grid;
+
+    grid-template-columns: auto 150px 150px 150px 150px;
+    grid-template-rows: auto;
+
+    @include breakpoint--max-width(600px) {
+      grid-template-columns: repeat(3, 1fr);
+      padding: 5px;
+      .group {
+        padding: 10px !important;
+
+        &.topOccupations {
+          padding-top: 10px;
+          grid-column: span 4;
+        }
+
+        &.growth-percent {
+          display: none;
+        }
+
+        &.jobbometer {
+          img {
+            width: 30px !important;
+          }
+        }
+
+        &.employed,
+        &.growth,
+        &.jobbometer {
+          padding-bottom: 0 !important;
+        }
+
+        .info {
+          &__title {
+            font-size: 10px !important;
+            margin-bottom: 5px !important;
+          }
+          &__text {
+            font-size: 14px !important;
+          }
+        }
+        .icon {
+          display: none;
+        }
+      }
+    }
+
+    @include breakpoint--min-width-max-width(601px, 1100px) {
+      grid-template-columns: repeat(3, 1fr);
+
+      .group {
+        &.topOccupations {
+          grid-column: span 2;
+        }
+        &.jobbometer {
+          order: 2 !important;
+          border-bottom: 1px solid $color--gray-light-1;
+          padding-top: 0 !important;
+        }
+      }
+    }
+
+    @include breakpoint--max-width(1100px) {
+      .group {
+        &.topOccupations {
+          border-bottom: 1px solid $color--gray-light-1;
+          padding-bottom: 20px;
+        }
+
+        &.employed {
+          border-left: none !important;
+        }
+
+        &.employed,
+        &.growth-percent,
+        &.jobbometer,
+        &.growth {
+          padding-bottom: 0;
+          padding-top: 20px;
+        }
+      }
+    }
+
+    .group {
+      text-align: center;
+      padding: 0 20px;
+
+      .info {
+        &__title {
+          font-weight: 700;
+          font-size: 14px;
+          margin-bottom: 20px;
+        }
+        &__text {
+          font-size: 16px;
+        }
+      }
+
+      &.employed,
+      &.jobbometer,
+      &.growth-percent,
+      &.growth {
+        border-left: 1px solid $color--gray-light-1;
+        .info-group {
+          text-align: center;
+        }
+      }
+
+      &.topOccupations {
+        order: 1;
+        text-align: left;
+        .info-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          &__item {
+            margin-right: 10px;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+          }
+        }
+      }
+      &.employed {
+        order: 10;
+      }
+
+      &.growth {
+        order: 20;
+      }
+
+      &.growth-percent {
+        order: 40;
+      }
+
+      &.jobbometer {
+        order: 50;
+        img {
+          width: 50px;
+          position: relative;
+        }
+      }
+
+      .icon {
+        font-size: 25px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

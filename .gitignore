@@ -1,0 +1,8 @@
+/.idea/
+/frontend/4.0
+/frontend/node_modules/
+/frontend/dist/
+.env
+.vscodei
+/frontend/src/environments/environment*
+/frontend/.env-localhost

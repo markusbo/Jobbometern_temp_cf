@@ -1,0 +1,51 @@
+@import "mixins/mixins";
+@import "material-tooltip";
+@import "variables/variables";
+@import "typography/typography";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+
+#sticky {
+  background-color: $color--gray-light-4;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.right-aligned-header > .mat-content {
+  justify-content: space-between;
+}
+
+.mat-content > mat-panel-title,
+.mat-content > mat-panel-description {
+  flex: 0 0 auto;
+}
+
+body,
+html {
+  background: $color--gray-light-1;
+}
+
+.btn-primary-jobbometern {
+  background-color: $color--primary-bg !important;
+}
+
+// Force scrollbar to show in Mac for all mat-autocomplete - begin
+.mat-autocomplete-panel::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+.mat-autocomplete-panel::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+// Force scrollbar to show in Mac for all mat-autocomplete - end
+
+// // Overwriting default styles from ngx-chart-lib
+
+@import "../app/charts/charts.component.scss";

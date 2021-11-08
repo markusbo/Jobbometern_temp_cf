@@ -1,0 +1,74 @@
+.example-container {
+  margin-top: 800px;
+}
+
+snav {
+  width: 500px;
+  min-width: 500px;
+}
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+      causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+      `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
+
+::ng-deep.mat-tab-label,
+::ng-deep.mat-tab-label-active {
+  min-width: 0 !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  width: 33.33% !important;
+  opacity: 100 !important;
+}
+
+/* New frontend design style */
+mat-sidenav.mat-drawer {
+  background-color: #f8f8f8;
+  font-weight: 200;
+}
+
+mat-sidenav-content.mat-drawer-content {
+  background-color: #f8f8f8;
+}
+
+div.mat-form-field-flex,
+div.mat-form-field-infix {
+  color: red !important;
+}
+
+mat-sidenav-container {
+  margin-top: 300px !important;
+}
+
+mat-expansion-panel,
+mat-expansion-panel-header#mat-expansion-panel-header-0.mat-expansion-panel-header {
+  background-color: #f8f8f8 !important;
+}
+
+::ng-deep
+  .demo-tab-group
+  div#mat-tab-label-0-0.mat-tab-labels.mat-ripple.ng-star-inserted.mat-tab-label-active:focus,
+::ng-deep
+  .demo-tab-group
+  div#mat-tab-label-0-0.mat-tab-labels.mat-ripple.ng-star-inserted.mat-tab-label-active:active,
+::ng-deep
+  .demo-tab-group
+  div#mat-tab-label-0-0.mat-tab-labels.mat-ripple.ng-star-inserted.mat-tab-label-active {
+  background-color: none !important;
+}

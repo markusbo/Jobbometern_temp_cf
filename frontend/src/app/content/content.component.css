@@ -1,0 +1,356 @@
+.container {
+  margin-top: 80px;
+  margin-bottom: 200px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media only screen and (max-width: 991px) {
+  .container {
+    margin-top: 0;
+    width: 100%;
+    max-width: unset;
+  }
+}
+
+.heading-area {
+  margin-bottom: 30px;
+  background-color: #7ec13d;
+  border-radius: 4px;
+  color: #fff;
+  margin-bottom: 10px;
+  padding: 20px 10px 15px 15px;
+}
+
+.job-h1 {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 991px) {
+  .heading-area,
+  div.my-job {
+    border-radius: 0 !important;
+  }
+}
+
+.left-column {
+  padding: 0;
+  margin: 0;
+}
+
+.my-job {
+  background-color: #d3dee0;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 20px 15px 70px 15px;
+}
+
+/* Navbar career search */
+.search,
+.location {
+  position: relative;
+}
+.search input,
+.location input {
+  text-indent: 21px;
+  color: #397697;
+}
+.search .fa-search,
+.location .fa-map-marker-alt {
+  color: #36769a;
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  font-size: 18px;
+}
+
+input.form-control {
+  margin-top: 3px;
+}
+
+div.item.summer-job {
+  margin-top: 10px;
+}
+/* Placeholder */
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  font-weight: 300;
+  font-size: 13px;
+  color: #397697;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  font-weight: 300;
+  font-size: 13px;
+  color: #397697;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  font-weight: 300;
+  font-size: 13px;
+  color: #397697;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  font-weight: 300;
+  font-size: 13px;
+  color: #397697;
+}
+
+/* Welcome */
+.job-icon {
+  width: 200px;
+}
+
+.search-job-text {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 991px) {
+  .tips {
+    display: block;
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .image-icon {
+    display: none;
+  }
+  .search-job-text {
+    margin-top: 10px;
+  }
+}
+
+/* Overview */
+.card-header {
+  padding: 15px;
+  display: block;
+  font-size: 19px;
+  font-weight: 400;
+  color: #333;
+  text-decoration: none;
+  background-color: #d3dee0;
+}
+.pull-right {
+  float: right !important;
+}
+
+.card-block,
+.card-footer {
+  border: 1px solid #d3dee0;
+  background-color: #fff;
+}
+
+.fa.fa-angle-up {
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  top: 3px;
+}
+
+fa.fa-pull-right,
+.fa.pull-right {
+  margin-left: 0.3em;
+}
+
+/* Card-block */
+.card-block .contentgroup .label {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 15px 5px 15px;
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ul.tag-list {
+  width: 100%;
+  list-style: none;
+  margin: 5px 15px;
+  padding: 0;
+}
+
+li.tag-item {
+  border-radius: 4px;
+  background-color: #c1e4f6;
+  color: #000;
+  float: left;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0 5px 5px 0;
+  padding: 2px 24px 4px 6px;
+  font-weight: 400;
+  position: relative;
+}
+
+li.tag-item .criteria-name {
+  text-overflow: ellipsis;
+  margin-right: 5px;
+  display: inline-block;
+  margin-left: 1px;
+  line-height: 20px;
+}
+
+button.btn-remove-tag {
+  background-color: transparent;
+  border-style: none;
+  padding: 0;
+  color: #737679;
+  position: absolute;
+  right: 1px;
+  top: 3px;
+}
+
+li.tag-item .btn-remove-tag i {
+  font-size: 14px;
+  padding: 4px 6px 3px;
+  position: relative;
+  border-radius: 4px;
+  margin-left: 0;
+}
+
+/* 过后会删除的 */
+.card-block {
+  height: 80px;
+}
+.card-footer {
+  height: 47px;
+}
+/* 以上会删除的 */
+
+/* Card-footer */
+.card-footer .clear {
+  color: #06769f;
+}
+
+.card-footer .clear > i {
+  margin-right: 2px;
+}
+
+.clear-all-text {
+  font-size: 13px;
+}
+
+/* Matched result */
+.founded-company {
+  display: block;
+  line-height: 30px;
+  margin-top: 10px;
+  font-size: 29px;
+}
+.matched-number {
+  font-weight: 600;
+  color: #333;
+  margin-right: 10px;
+}
+
+/* Icon expalination */
+i.employee-number,
+i.job-rate,
+span.rateIcon,
+i.fas.fa-thumbs-up,
+span.number {
+  margin-right: 10px;
+}
+
+span.number {
+  font-size: 17px;
+  color: #333;
+}
+
+/* Announce short */
+
+span.rateIcon {
+  font-size: 17px;
+  font-weight: 600;
+}
+span i.employee-number {
+}
+
+span i.job-rate {
+}
+
+.annons-short {
+  background-color: #fff;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #959fa4;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+div.hire-people,
+div.jobChance,
+div.rankChance {
+  padding: 0;
+  border-left: 1px solid #ebeef0;
+  padding-left: 10px;
+}
+
+.icon-explanation {
+  margin-bottom: 20px;
+}
+
+a.company-title:hover {
+  text-decoration: underline;
+}
+
+span.thumps-up {
+  margin-left: 10px;
+  color: #27b467;
+}
+
+/* Button Style */
+.pb-pagination .nav-btn {
+  border: 0;
+  border-radius: 5px;
+  color: #13769d;
+  background-color: #f2f4f5;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.pb-pagination .next,
+.pb-pagination .prev {
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: block;
+}
+
+.pb-pagination .next {
+  float: right;
+  text-align: right !important;
+}
+
+.pb-pagination .prev {
+  float: left;
+  text-align: left !important;
+}
+
+button {
+  cursor: pointer;
+}
+@media only screen and (max-width: 991px) {
+  .resultArea {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .founded-company,
+  .icon-explanation {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .heading-area {
+    margin-left: 0;
+    margin-bottom: 20px;
+  }
+}
+
+.welcome-hint-details {
+  padding-bottom: 50px;
+}

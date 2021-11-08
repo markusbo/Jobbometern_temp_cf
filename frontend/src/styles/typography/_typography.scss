@@ -1,0 +1,40 @@
+@import "fonts";
+/* Typography */
+
+body {
+  font-family: "Open sans", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: $color--gray-dark-1;
+  background-color: #ebeef0;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+a {
+  color: $color--light-petrol;
+  text-decoration: none;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 0 0 100px;
+  /* bottom = footer height */
+}

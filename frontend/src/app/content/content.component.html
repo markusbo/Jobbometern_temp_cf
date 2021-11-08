@@ -1,0 +1,49 @@
+<div class="content" fxLayout="row" fxLayoutAlign="center stretch">
+
+  <div fxFlex="100%" fxFlex.gt-xs="80%">
+    <div class="content-top">
+      <div class="py-4">
+        <app-search class="inputs-container" #search></app-search>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pt-2 content-bottom" *ngIf="this.searchService.currentSearch">
+  <div fxFlex fxLayout="row" fxLayout.lt-sm="column" >
+    <div fxFlex="100%" fxFlex.gt-sm="30%" class="content-bottom-left-col">
+      <app-employers-list #employersList
+                          (employer)="updateEmployerInfo($event)"></app-employers-list>
+    </div>
+    <div fxFlex="100%" fxFlex.gt-sm="70%" class="content-bottom-right-col" fxLayoutAlign="start start">
+      <app-employer-info [employerInput]="employerLight" class="app-employer-info"></app-employer-info>
+    </div>
+  </div>
+</div>
+
+<div class="pt-2 content-bottom-welcome-page" *ngIf="!this.searchService.currentSearch">
+  <div fxLayout="column" fxLayoutAlign="start center">
+  <div class="one-liner-text" fxLayout="row" fxLayoutAlign="center start">
+    Jobbometern är ett prognosverktyg som uppskattar rekryteringsbehovet hos arbetsgivare i Sverige
+  </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center end">
+    <div class="startpage-text-container"  >
+      <div class="startpage-text"  >
+        <h2>Sök och få information om arbetsgivare utifrån:</h2>
+        <ul>
+          <li>Förväntat antal nyrekryteringar det närmaste året</li>
+        <li>Vilka yrken som vanligtvis efterfrågas</li>
+        <li>Vilka kompetenser och förmågor som vanligtvis efterfrågas för olika yrken</li>
+        <li>När på året rekryteringar normalt sett sker</li>
+        <li>Aktuella jobbannonser</li>
+        </ul>
+        <p>Jobbometern baseras på data från Bolagsverket, Skatteverket, Statistikmyndigheten SCB och Arbetsförmedlingen.
+        Alla prognoser som visas är beräknade utifrån historisk data och trend. Tidsperioden som det finns tillgänglig data
+          för, och oförutsedda händelser, kan därför påverka träffsäkerheten i prognoserna.</p>
+      </div>
+    </div>
+  </div>
+  <p class="photographer-tribute">Photo by Guilherme Stecanella on Unsplash</p>
+</div>
+<router-outlet></router-outlet>

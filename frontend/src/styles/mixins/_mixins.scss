@@ -1,0 +1,43 @@
+@mixin main-container-margin {
+  margin: 80px 100px 200px 100px;
+  @media only screen and (max-width: 1400px) {
+    margin: 30px 10px 150px 10px;
+  }
+}
+
+@mixin breakpoint--max-width($maxWidth) {
+  @media only screen and (max-width: $maxWidth) {
+    @content;
+  }
+}
+
+@mixin breakpoint--min-width($minWidth) {
+  @media only screen and (min-width: $minWidth) {
+    @content;
+  }
+}
+
+@mixin breakpoint--min-width-max-width($minWidth, $maxWidth) {
+  @media only screen and (min-width: $minWidth) and (max-width: $maxWidth) {
+    @content;
+  }
+}
+
+@mixin outer-container {
+  @include breakpoint--max-width(800px) {
+    padding: 20px;
+  }
+  @include breakpoint--min-width(801px) {
+    padding: 50px;
+  }
+}
+
+@mixin content-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@mixin shadow() {
+  box-shadow: 2px 2px 14px 2px rgba(201, 201, 201, 0.5);
+}

@@ -1,0 +1,58 @@
+<ngx-charts-area-chart
+  *ngIf="growthPrediction"
+  [results]="growthPrediction"
+  class="chart"
+  [scheme]="colorSchemeAF_few"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegendGrowth"
+  [legendTitle]="legendTitleGrowth"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [showGridLines]="false"
+  [xAxisLabel]="xAxisLabelGrowth"
+  [yAxisLabel]="yAxisLabelGrowth"
+  [autoScale]="autoscale"
+  [xAxisTickFormatting]="formatGrowthXTicks"
+  [xAxisTicks]="xAxisTicksGrowth"
+  (select)="onSelect($event)"
+>
+</ngx-charts-area-chart>
+
+<ngx-charts-bar-horizontal
+  *ngIf="topOccupations"
+  [results]="topOccupations"
+  class="chart"
+  [scheme]="colorSchemeAF_many"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="false"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [showGridLines]="false"
+  [legendTitle]="legendTitleGrowth"
+  [barPadding]="4"
+  (select)="onSelect($event)"
+>
+</ngx-charts-bar-horizontal>
+<!---->
+
+<ngx-charts-polar-chart
+  *ngIf="staffingAndRecruitments"
+  [results]="staffingAndRecruitments"
+  class="chart"
+  [scheme]="colorSchemeAF_few"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegendMonths"
+  [legendTitle]="legendTitleGrowth"
+  [showXAxisLabel]="showXAxisLabelMonths"
+  [showYAxisLabel]="false"
+  [xAxisLabel]="xAxisLabelMonths"
+  [yAxisLabel]="yAxisLabelMonths"
+  [autoScale]="autoscaleYear"
+  (select)="onSelect($event)"
+>
+</ngx-charts-polar-chart>

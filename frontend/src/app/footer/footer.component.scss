@@ -1,0 +1,39 @@
+@import "../../styles/mixins/mixins";
+
+.app-footer {
+    padding: 1em;
+
+
+
+    @include breakpoint--min-width(1200px) {
+        padding-right: 12em;
+    }
+
+}
+
+.footer-logo {
+    height: 44px;
+}
+
+.tsl-logo {
+    width: 50px;
+    margin-right: 2em;
+
+    @include breakpoint--max-width(799px)
+    {
+        margin-right: 1em;
+    }
+}
+
+p.footer-text {
+    margin-right: 2em;
+    margin-bottom: -0.4em;
+    font-size: 1.2em;
+    font-weight: 500;
+    font-family: monospace;
+    @include breakpoint--max-width(799px)
+    {
+        font-size: 0.8em;
+        margin-right: 1em;
+    }
+}

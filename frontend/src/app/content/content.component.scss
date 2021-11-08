@@ -1,0 +1,262 @@
+@import "../../styles/variables/variables";
+@import "../../styles/mixins/mixins";
+
+.welcome-image{
+  width:100%;
+  z-index: 0;
+}
+
+.content-bottom-welcome-page {
+  position: relative;
+  //height: 757px;
+  background-image: url('../../assets/images/welcomepage.png');
+  background-repeat: no-repeat;
+  //background-size: 120%;
+  //background-position: 45% 20%;
+
+  @include breakpoint--max-width(415px) {
+    background-size: 200%;
+    background-position: 70% 0;
+  }
+  @include breakpoint--min-width(416px) {
+    background-size: 250%;
+    background-position: 60% 30%;
+  }
+  @include breakpoint--min-width(539px) {
+    background-size: 250%;
+    background-position: 60% 30%;
+  }
+  @include breakpoint--min-width(800px)  {
+    height: 500px;
+    background-size: 100%;
+  }
+
+  .one-liner-text {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-bottom: 2em;
+    font-weight: 500;
+    font-family: monospace;
+
+    @include breakpoint--max-width(415px) {
+      font-size: 1em;
+      font-weight: 200;
+    }
+    @include breakpoint--min-width(800px)  {
+      margin-top: 1em;
+      font-size: 1.5em;
+    }
+  }
+
+  .startpage-text-container {
+  }
+
+  .startpage-text {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 1em;
+
+    @include breakpoint--max-width(799px)
+    {
+      h2 {
+        font-weight: 700;
+        font-size: 1.0em;
+      }
+    }
+
+    @include breakpoint--max-width(415px) {
+      margin-top: 3em;
+      margin-right: 1em;
+      font-size: 0.8em;
+      max-width: 200px;
+    }
+    @include breakpoint--min-width(416px) {
+      margin-top: 2em;
+      margin-right: 1em;
+      font-size: 0.8em;
+      max-width: 240px;
+    }
+    @include breakpoint--min-width(539px) {
+      margin-top: 3em;
+      margin-right: 1em;
+      font-size: 1em;
+      max-width: 330px;
+    }
+    @include breakpoint--min-width(800px)  {
+      margin-top: 3em;
+      margin-right: 2em;
+      font-size: 1.2em;
+      max-width: 440px;
+      padding: 0.5em;
+    }
+    @include breakpoint--min-width(1200px) {
+      margin-top: 4em;
+      margin-right: 10em;
+      font-size: 1.2em;
+      max-width: 500px;
+      padding: 1em;
+    }
+    .h2 {
+      font-weight: 700;
+    }
+    p {
+      margin-bottom: 0.5em;
+    }
+  }
+}
+
+.cropped {
+  // width: 150px; /* width of container */
+  // height: 150px; /* height of container */
+  overflow: hidden;
+  border: 5px solid black;
+  width:100%;
+}
+
+.cropped img {
+  margin: -10px 0px 0px -180px;
+  width:100%;
+}
+
+.content {
+  background-color: #f8f8f8;
+}
+
+
+.content-top {
+}
+
+.jobbometern-intro-text {
+  margin-top: 0.5em;
+}
+
+.content-bottom {
+  height: 100%;
+}
+
+.content-bottom-left-col {
+}
+
+.content-bottom-right-col {
+}
+
+.photographer-tribute {
+  margin-top: 2em;
+  margin-left: 14em;
+  font-size: 0.9em;
+}
+
+.app-employer-info {
+  width: 100%;
+  max-width: 1000px;
+}
+
+.hero {
+  width: 100%;
+  max-height: 600px;
+  background: url("../../assets/christopher-burns-368617-unsplash.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include breakpoint--max-width(480px) {
+    padding: 0 !important;
+  }
+  @include outer-container();
+
+  .search-block {
+    display: flex;
+
+    @include content-container();
+
+    @include breakpoint--max-width(800px) {
+      flex-direction: column;
+
+      .promo {
+        width: 100%;
+        display: flex;
+        padding: 20px;
+        justify-content: space-between;
+        align-items: center;
+        &__text {
+          font-size: 16px;
+          margin-right: 10px;
+          max-width: 380px;
+        }
+        .icon {
+          font-size: 47px;
+        }
+        @include breakpoint--max-width(450px) {
+          &__text {
+            font-size: 14px;
+            max-width: 320px;
+          }
+          .icon {
+            font-size: 40px;
+          }
+        }
+      }
+    }
+    @include breakpoint--min-width(801px) {
+      height: 400px;/*450px*/
+      .promo {
+        width: 400px;
+        padding: 0 50px;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 1fr auto;
+        &__text {
+          font-size: 18px;/*20px*/
+        }
+        .icon {
+          font-size: 200px;
+        }
+      }
+    }
+
+    .promo {
+      background: $color--AF-blue;
+
+      .text-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .icon-wrapper {
+        display: flex;
+        justify-content: center;
+      }
+      &__text {
+        margin: 0;
+        font-weight: 700;
+        color: #fff;
+        &--highlight {
+          color: $color--sky-blue;
+        }
+      }
+
+      .icon {
+        color: $color--sky-blue;
+      }
+    }
+    .inputs-container {
+      width: 100%;
+      background: $color--gray-light-2;
+
+      @include breakpoint--max-width(650px) {
+        padding: 25px;
+      }
+      @include breakpoint--min-width(651px) {
+        padding: 50px;
+      }
+    }
+  }
+}
+
+.results {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
