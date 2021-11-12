@@ -6,3 +6,5 @@
 .vscodei
 /frontend/src/environments/environment*
 /frontend/.env-localhost
+dist/
+node_modules/

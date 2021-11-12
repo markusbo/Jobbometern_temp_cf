@@ -103,7 +103,8 @@ export class EmployerService {
     
     employerOut.historikFinns = true ? employerOut.historik.antalAnnonser>0 : false
     
-    let est_seasonal = JSON.parse(employer.est_seasonal)
+    // (!) change to json in return data
+    let est_seasonal = JSON.parse(employer.est_seasonal.replaceAll("'",'\"'))//JSON.parse(employer.est_seasonal)
     if('recruiting' in est_seasonal)
       employerOut.historik.histogramDistribution = est_seasonal.recruiting;
     
@@ -114,13 +115,13 @@ export class EmployerService {
       employerOut.enrichmentsOccupations[occ] = new EnrichmentsOccupation();
 
       for(let key in employerOut.occupations[occ]) {
-        let vals = JSON.parse(employerOut.occupations[occ][key].replace(/'/g,'"'))
+        let vals = employerOut.occupations[occ][key]//JSON.parse(employerOut.occupations[occ][key].replace(/'/g,'"'))
         employerOut.occupations[occ][key] = vals
         employerOut.enrichmentsOccupations[occ][key] = vals
       }
     }
 
-    let est_growth = JSON.parse(employer.est_growth)
+    let est_growth = employer.est_growth;//JSON.parse(employer.est_growth)
     if(est_growth) {
       employerOut.man12_rel = est_growth['months_12']
       employerOut.man12_pm_rel = est_growth['months_12_std']

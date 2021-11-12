@@ -266,7 +266,7 @@ export class SearchComponent implements OnInit {
 
         if (this.locationCtrl.value) {
           const queryLocation = new Location();
-          queryLocation.name = this.locationCtrl.value;//this.locationCtrl.value.name;
+          queryLocation.name = this.locationCtrl.value.name;//this.locationCtrl.value
           queryLocation.code = this.locationCtrl.value.code;
           queryLocation.type = this.locationCtrl.value.type;
 

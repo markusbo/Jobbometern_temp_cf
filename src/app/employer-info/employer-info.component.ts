@@ -268,7 +268,7 @@ export class EmployerInfoComponent implements OnChanges {
      if (this.employer !== undefined) {
         if (this.employer.hasOwnProperty('top_occupations_fractions') && this.employer.top_occupations_fractions.length > 0) {
           return this.employer.top_occupations_fractions;
-        } else if (this.employer.hasOwnProperty('top_occupations') && this.employer.top_occupations.length > 0) {
+        } else if (this.employer.hasOwnProperty('top_occupations') && this.employer.top_occupations != null && this.employer.top_occupations.length > 0) {
          return this.employer.top_occupations;
         } else {
           return [];
@@ -292,11 +292,12 @@ export class EmployerInfoComponent implements OnChanges {
     const top_occupations_to_handle = this.get_correct_top_occupations(this.employer);
 
     top_occupations_to_handle.forEach(occupation => {
-      const occupationId = +occupation[0];
-      const share = occupation[1];
+      const occupationId = occupation[0];//+occupation[0];
+      const share = occupation[2];
+      const name = occupation[1];
 
       // console.log('occupationId: ' + occupationId + ', share: ' + share);
-      const isOccupationIdNumeric = !Number.isNaN(occupationId);
+      const isOccupationIdNumeric = true;// !Number.isNaN(occupationId);
 
       if (isOccupationIdNumeric && this.employerService.hasOccupation(occupationId)) {
         const occupationName = this.employerService.getOccupation(occupationId);
@@ -307,11 +308,12 @@ export class EmployerInfoComponent implements OnChanges {
           this.selectedOccupationIndex = vals.length;
           this.generateTopPropertiesForOccupation(this.selectedOccupation);
         }
-        vals.push([occupationName, share]);
+        vals.push([occupationName, share, name]);
         // console.log('Setting occupation: ' + occupationName + ' to ' + occupationId);
         this.occupationNameToId[occupationName] = occupationId;
+      //} else if (!isOccupationIdNumeric && occupation[0].toLowerCase() === 'övrigt') {
       } else if (!isOccupationIdNumeric && occupation[0].toLowerCase() === 'övrigt') {
-        vals.push([occupation[0], share]);
+        vals.push([occupation[0], share, name]);
       } else {
         console.warn('WARNING! occupationId ' + occupationId + ' is missing in the OccupationService!');
       }
@@ -322,7 +324,11 @@ export class EmployerInfoComponent implements OnChanges {
     // console.log('nr of vals for _chartsOccupations: ' + vals.length);
     // console.log('vals for _chartsOccupations: ' + vals);
 
-    this._chartsOccupations = vals;
+    let val2 = []
+    for(let v of vals) {
+      val2.push([v[2],v[1]])
+    }
+    this._chartsOccupations = val2;
     /* Pre select the first occupation if none of the occupations were included in the search filter... */
     if (!this.selectedOccupation && this._chartsOccupations.length > 0 && this._chartsOccupations[0][0]) {
       this.selectedOccupation = this._chartsOccupations[0][0];

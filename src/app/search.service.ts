@@ -289,8 +289,8 @@ export class SearchService {
     let empls = new Array<EmployerLight>();
     for(let d of data) {
       let empl_light = new EmployerLight();
-      empl_light.organisationsnummer = d
-      empl_light.namn = d
+      empl_light.organisationsnummer = d[0]
+      empl_light.namn = d[1]
       empl_light.rankValue = 1
       empls.push(empl_light)
     }

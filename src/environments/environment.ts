@@ -5,5 +5,5 @@ export const environment = {
     production: true,
     employerApiAccessPassword: undefined,
     tlsSubDomainName: "jobbometern-tsl",
-    forceBrandingMode: "valid values for forcing the branding: Tsl, Default"
+    forceBrandingMode: "Tsl"
 };
