@@ -181,9 +181,6 @@ export class SearchService {
     const pageQuery = `?page=${this.page}&per_page=${this.nrDocs}`
 
     const url = `${this.backendUrl}${occQuery}${indQuery}${locationQuery}${pageQuery}`
-    //const url = `${this.backendUrl}/search/filter/?&page=${this._page}&docs=${
-    //  this.nrDocs
-    //  }${occQuery}${indQuery}${locationQuery}`;
 
     console.log('SearchType.AdvancedSearch, url: ', url);
 
@@ -238,7 +235,7 @@ export class SearchService {
     searchResult.count = searchResult.employers.length;
 
     if ('overview' in data) {
-      searchResult.totalCount = data.overview['count'];
+      searchResult.totalCount = data.overview['nr_employers'];
       if (searchResult.totalCount < 0) {
         // overview['count'] is sometimes -1
         searchResult.totalCount = 0;
@@ -287,7 +284,7 @@ export class SearchService {
     }
 
     let empls = new Array<EmployerLight>();
-    for(let d of data) {
+    for(let d of data.employers) {
       let empl_light = new EmployerLight();
       empl_light.organisationsnummer = d[0]
       empl_light.namn = d[1]
@@ -308,23 +305,6 @@ export class SearchService {
     }
     searchResult.overview = this.createEmptyOverview();
     
-
-    /*if (data.length !== 0 && data['list'] !== undefined) {
-      const fetchedEmployers = this.setEmployerHasPredictions(data['list']);
-
-      if (appendResult) {
-        searchResult.employers = searchResult.employers.concat(fetchedEmployers);
-      } else {
-        searchResult.employers = fetchedEmployers;
-      }
-
-      searchResult.overview = data['overview'];
-
-    } else {
-      searchResult.employers = [];
-      searchResult.overview = this.createEmptyOverview();
-    }*/
-
     this.updateCount(data, searchResult);
     this.isLoadingFirstPageResult = false;
     this.isLoadingPageResult = false;

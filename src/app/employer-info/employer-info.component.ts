@@ -300,7 +300,7 @@ export class EmployerInfoComponent implements OnChanges {
       const isOccupationIdNumeric = true;// !Number.isNaN(occupationId);
 
       if (isOccupationIdNumeric && this.employerService.hasOccupation(occupationId)) {
-        const occupationName = this.employerService.getOccupation(occupationId);
+        const occupationName = name;//this.employerService.getOccupation(occupationId);
 
         /* Pre select if user has includede occupation in the search filter... */
         if (searchedOccupation && searchedOccupation === occupationName) {
