@@ -170,12 +170,21 @@ export class SearchService {
     const industry = searchQuery.bransch;
     const location = searchQuery.location;
 
-    const occQuery = occupation ? '/occupation/' + occupation : '';//occupation ? `&occupation=${occupation}` : '';
+    const occQuery = occupation ? '/occupation-name/' + occupation : '';//occupation ? `&occupation=${occupation}` : '';
     const indQuery = industry ? '/industry/' + industry : '';//industry ? `&industry=${industry}` : '';
 
     let locationQuery = '';
     if (location) {
-      locationQuery = '/location/' + location.name;//`&location_code=${location.code}&location_name=${location.name}&location_type=${location.type.toUpperCase()}`;
+      if(location.type == 'kommun') {
+        locationQuery = '/municipality/' + location.name;
+      }
+      else if(location.name.includes(' län')) {
+        locationQuery = '/county/' + location.name;
+      }
+      else {
+        locationQuery = '/city/' + location.name;
+      }
+      //`&location_code=${location.code}&location_name=${location.name}&location_type=${location.type.toUpperCase()}`;
     }
     
     const pageQuery = `?page=${this.page}&per_page=${this.nrDocs}`
@@ -202,9 +211,13 @@ export class SearchService {
     this.setCurrentSearch(searchQuery);
     this.setDefaultValuesForNewSearch(appendResult);
 
-    const url = `${this.backendUrl}/allrecords?page=${this._page}&docs=${
+    /*const url = `${this.backendUrl}/allrecords?page=${this._page}&docs=${
       this.nrDocs
-      }`;
+      }`;*/
+
+    const url = `${this.backendUrl}/country/Sweden?page=${this._page}&per_page=${
+        this.nrDocs
+        }`;
 
     console.log('SearchType.TopEmployers, url: ', url);
 
@@ -215,7 +228,7 @@ export class SearchService {
       });
     } else {
       this.httpClient.get(url).pipe(catchError(this.handleError)).subscribe(data => {
-        this._searchResult = this.httpResponseHandler(data, searchQuery, appendResult);
+        this._searchResult = this.httpResponseHandler_cf(data, searchQuery, appendResult);
       });
     }
   }
@@ -288,7 +301,7 @@ export class SearchService {
       let empl_light = new EmployerLight();
       empl_light.organisationsnummer = d[0]
       empl_light.namn = d[1]
-      empl_light.rankValue = 1
+      empl_light.predictions = { 'man12_rel': d[2] }
       empls.push(empl_light)
     }
 
@@ -347,7 +360,6 @@ export class SearchService {
 
     return searchResult;
   }
-
 
   handleError = (error: HttpErrorResponse) => {
     if (error.error instanceof ErrorEvent) {

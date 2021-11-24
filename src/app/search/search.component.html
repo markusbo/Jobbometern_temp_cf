@@ -67,7 +67,7 @@
                         *ngFor="let p of (filteredLocations | async)"
                         [value]="p"
                 >
-                  <span>{{ p.name }}</span> <!--<small> ({{ p.displayType }})</small>-->
+                  <span>{{ p.name }} <small> ({{ p.displayType }})</small></span>
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
