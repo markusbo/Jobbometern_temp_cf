@@ -401,7 +401,7 @@ export class EmployerInfoComponent implements OnChanges {
   getRecruitmentsPerMonth() {
     const recruitmentsPerMonthChartData = [];
     const recruitmentsForMonths = [];
-    if (this.employer && this.employer.historik && this.employer.historik.histogramDistribution) {
+    if (this.employer && this.employer.historik && this.employer.historik.histogramDistribution && Object.keys(this.employer.historik.histogramDistribution).length > 0) {
       const histogram = this.employer.historik.histogramDistribution;
 
       const monthsLabels = [
