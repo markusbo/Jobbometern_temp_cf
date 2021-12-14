@@ -25,7 +25,8 @@
           <div class="info-row">
             <p class="label-text">Antal anställda:</p>
             <p class="value-text">
-              ca {{ employer.ekonomiskInformation.antalAnstallda | roundDynamic }}
+              {{ employer.uppskattade_antal_anstallda }}
+              <!--ca {{ employer.ekonomiskInformation.antalAnstallda | roundDynamic }}-->
             </p>
           </div>
           <div class="info-row">
@@ -62,7 +63,7 @@
           </div>
           <div class="info-row">
             <p class="label-text">Förväntade nyrekryteringar:</p>
-            <p class="value-text">ca {{ employer.rankValue }}</p>
+            <p class="value-text">{{ employer.uppskattade_nyrekryteringar }}<!--ca {{ employer.rankValue }}--></p>
           </div>
           <div class="info-row">
             <p class="label-text">Förväntad tillväxttakt:</p>
