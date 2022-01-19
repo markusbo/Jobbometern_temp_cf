@@ -28,10 +28,10 @@ def make_collection_info(orgnr, orgnr2data, table_empl):
     
     est_growth = -1
     est_size_class = -1
-    if 'est_growth' in employer and 'months_12' in employer['est_growth']:
-        est_growth = employer['est_growth']['months_12']
-    if 'est_size_class' in employer:
-        est_size_class = employer['est_size_class']
+    if 'workforce_growth' in employer and 'pred_months_12' in employer['workforce_growth']:
+        est_growth = employer['workforce_growth']['pred_months_12']
+    if 'size' in employer and 'est_class' in employer['size']:
+        est_size_class = employer['size']['est_class']
 
     return [str(nr), employer['name'], est_growth, est_size_class]
 
@@ -78,7 +78,7 @@ for i, t in enumerate(coll_type):
         key_rs = coll_code[i].lower()
 
     key = 'new_' + t + '_' + key_rs
-    orgnrs = json.loads(coll_orgnrs[i])
+    orgnrs = list(coll_orgnrs[i])
 
     info = [ make_collection_info(orgnr, orgnr2data, table_empl) for orgnr in orgnrs ]
     val = {'info': info }
