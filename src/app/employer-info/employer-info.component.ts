@@ -292,15 +292,14 @@ export class EmployerInfoComponent implements OnChanges {
     const top_occupations_to_handle = this.get_correct_top_occupations(this.employer);
 
     top_occupations_to_handle.forEach(occupation => {
-      const occupationId = occupation[0];//+occupation[0];
-      const share = occupation[2];
-      const name = occupation[1];
+      const occupationId = occupation.concept;
+      const share = occupation.probability;
+      const name = occupation.term;
 
-      // console.log('occupationId: ' + occupationId + ', share: ' + share);
-      const isOccupationIdNumeric = true;// !Number.isNaN(occupationId);
+      const isOccupationIdNumeric = true;
 
       if (isOccupationIdNumeric && this.employerService.hasOccupation(occupationId)) {
-        const occupationName = name;//this.employerService.getOccupation(occupationId);
+        const occupationName = name;
 
         /* Pre select if user has includede occupation in the search filter... */
         if (searchedOccupation && searchedOccupation === occupationName) {
@@ -309,9 +308,9 @@ export class EmployerInfoComponent implements OnChanges {
           this.generateTopPropertiesForOccupation(this.selectedOccupation);
         }
         vals.push([occupationName, share, name]);
-        // console.log('Setting occupation: ' + occupationName + ' to ' + occupationId);
+
         this.occupationNameToId[occupationName] = occupationId;
-      //} else if (!isOccupationIdNumeric && occupation[0].toLowerCase() === 'övrigt') {
+
       } else if (!isOccupationIdNumeric && occupation[0].toLowerCase() === 'övrigt') {
         vals.push([occupation[0], share, name]);
       } else {

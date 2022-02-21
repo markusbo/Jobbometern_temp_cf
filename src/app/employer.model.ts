@@ -54,6 +54,10 @@ export class Employer {
     utdelningsadress: Utdelningsadress;
     verksamhetsbeskrivning: string;
     workplaces: Workplace[];
+
+    // replaces nr employees and expected absolute workforce growth
+    uppskattade_antal_anstallda: string;
+    uppskattade_nyrekryteringar: string;
 }
 
 export class EmployerLight {

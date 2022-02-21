@@ -144,9 +144,7 @@ export class SearchService {
 
     const query: string = searchQuery.fritext;
 
-    const url = `${this.backendUrl}/search/lw?search=${query}&page=${
-      this._page
-      }&docs=${this.nrDocs}`;
+    const url = `${this.backendUrl}/free/${query}?page=${this.page}&per_page=${this.nrDocs}`;
 
     console.log('SearchType.FreeSearch, url: ', url);
 
@@ -157,7 +155,7 @@ export class SearchService {
       });
     } else {
       this.httpClient.get(url).pipe(catchError(this.handleError)).subscribe(data => {
-        this._searchResult = this.httpResponseHandler(data, searchQuery, appendResult);
+        this._searchResult = this.httpResponseHandler_cf(data, searchQuery, appendResult);
       });
     }
   }
@@ -171,7 +169,7 @@ export class SearchService {
     const location = searchQuery.location;
 
     const occQuery = occupation ? '/occupation-name/' + occupation : '';//occupation ? `&occupation=${occupation}` : '';
-    const indQuery = industry ? '/industry/' + industry : '';//industry ? `&industry=${industry}` : '';
+    const indQuery = industry ? '/industry_group/' + industry : '';//industry ? `&industry=${industry}` : '';
 
     let locationQuery = '';
     if (location) {
@@ -259,7 +257,6 @@ export class SearchService {
       }
     }
   }
-
 
   private createEmptyOverview(): OverView {
     const overview = new OverView();

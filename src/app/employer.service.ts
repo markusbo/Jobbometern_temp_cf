@@ -86,6 +86,13 @@ export class EmployerService {
     employerOut.historik = new Historik();
     employerOut.enrichmentsOccupations = {}
 
+    employerOut.uppskattade_antal_anstallda = employer.size.term
+
+    let est_growth = employer.workforce_growth;
+
+    if(est_growth)
+      employerOut.uppskattade_nyrekryteringar = est_growth.growth_class_term;
+
 
     employerOut.namn = employer.name;
     employerOut.organisationsnummer = employer.organization_number;
@@ -94,94 +101,44 @@ export class EmployerService {
     employerOut.utdelningsadress.adress1 = employer.address? employer.address: ''
     employerOut.utdelningsadress.postort = employer.city? employer.city: ''
     employerOut.utdelningsadress.land = ''
-    employerOut.utdelningsadress.postnummer = ''
+    employerOut.utdelningsadress.postnummer = employer.postal_code
 
     // (!) change to return JSON and not text
-    employerOut.occupations = JSON.parse(employer.est_competencies_traits)
-    employerOut.top_occupations = JSON.parse(employer.est_top_occupations)
-    employerOut.historik.antalAnnonser = JSON.parse(employer.history_nr_ads)
+    const temp_occupations = employer.competencies_traits
+    employerOut.top_occupations = employer.top_occupations
+    employerOut.historik.antalAnnonser = employer.nr_ads.pb
     
     employerOut.historikFinns = true ? employerOut.historik.antalAnnonser>0 : false
     
     // (!) change to json in return data
-    let est_seasonal = JSON.parse(employer.est_seasonal.replaceAll("'",'\"'))//JSON.parse(employer.est_seasonal)
+    let est_seasonal = employer.seasonal
     if('recruiting' in est_seasonal)
       employerOut.historik.histogramDistribution = est_seasonal.recruiting;
     
     employerOut.rankValue = 1.0
+    employerOut.occupations = {}
 
-    for(let occ in employerOut.occupations) {
+    for(let i in employer.competencies_traits) {
 
+      const occ = employer.competencies_traits[i].concept
+      
+      employerOut.occupations[occ] = {}
       employerOut.enrichmentsOccupations[occ] = new EnrichmentsOccupation();
 
-      for(let key in employerOut.occupations[occ]) {
-        let vals = employerOut.occupations[occ][key]//JSON.parse(employerOut.occupations[occ][key].replace(/'/g,'"'))
+      for(let key in employer.competencies_traits[i]){
+        let vals = employer.competencies_traits[i][key];
         employerOut.occupations[occ][key] = vals
         employerOut.enrichmentsOccupations[occ][key] = vals
       }
     }
 
-    let est_growth = employer.est_growth;//JSON.parse(employer.est_growth)
     if(est_growth) {
-      employerOut.man12_rel = est_growth['months_12']
-      employerOut.man12_pm_rel = est_growth['months_12_std']
+      employerOut.man12_rel = est_growth.pred_months_12
+      employerOut.man12_pm_rel = est_growth.pred_months12_std
       let est_size = 100;
       employerOut.man12_nr = (employerOut.man12_rel * est_size) / 100.0;
       employerOut.man12_nr = this.round(employerOut.man12_nr, 0)
     }
-
-    // Copy all property values from Object into Employer.
-/*    Object.keys(employer).forEach(key => employerOut[key] = employer[key]);
-
-    const workplaces: Workplace[] = [];
-    if ('arbetsstallen_list' in employer && employer.arbetsstallen_list) {
-      for (let i = 0; i < employer.arbetsstallen_list.length; i++) {
-        const workplace = new Workplace();
-        workplace.cfar = employer.arbetsstallen_list[i][0];
-        workplace.name = employer.arbetsstallen_list[i][1];
-        workplace.visitAddress = employer.arbetsstallen_list[i][2];
-        workplace.visitAddressZipCode = employer.arbetsstallen_list[i][3];
-        workplace.visitAddressPostOffice = employer.arbetsstallen_list[i][4];
-        workplace.visitAddressCo = employer.arbetsstallen_list[i][5];
-        workplaces.push(workplace);
-      }
-      workplaces.sort(( a, b ) => a.visitAddressPostOffice > b.visitAddressPostOffice ? 1 : -1 );
-
-    }
-    employerOut.workplaces = workplaces;
-
-    if ('occupation_posterior' in employer) {
-        employerOut.occupations = employer.occupation_posterior;
-    }
-
-    if (this.currentOccupation) {
-        employerOut.rankValue = this.round(
-        ((employer.ekonomiskInformation.antalAnstallda *
-          employer.predictions['man12_rel']) /
-          100.0) *
-          employer.occupations[this.currentOccupation],
-        2
-      );
-        employerOut.occupationProbability = this.round(
-        employer.occupations[this.currentOccupation] * 100.0,
-        0
-      );
-        employerOut.occupationCount = this.round(
-        employer.occupations[this.currentOccupation] *
-          employer.ekonomiskInformation.antalAnstallda,
-        0
-      );
-    }
-
-      employerOut.man1_rel = employer.predictions['man1_rel'];
-      employerOut.man3_rel = employer.predictions['man3_rel'];
-      employerOut.man12_rel = employer.predictions['man12_rel'];
-      employerOut.man1_pm_rel = employer.predictions['man1_pm_rel'];
-      employerOut.man3_pm_rel = employer.predictions['man3_pm_rel'];
-      employerOut.man12_pm_rel = employer.predictions['man12_pm_rel'];
-      employerOut.man12_nr =
-      (employerOut.man12_rel * employerOut.ekonomiskInformation.antalAnstallda) / 100.0;
-*/
 
     // round predicted employees
     if (employer.man12_nr > 1000) {
